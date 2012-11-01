@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>Twitter Search by AngularJS</title>
+  </head>
+  <body>
+    <h1>Twitter Search by AngularJS</h1>
+    <div ng-controller="TwitterSearchCtrl">
+      <form novalidate name="search" ng-submit="doSearch()">
+        検索ワード:
+        <input type="text" name="query" ng-model="query" required />
+        <input type="submit" value="検索" ng-disabled="search.$invalid" />
+      </form>
+      <h2>検索結果</h2>
+      <ul ng-show="results.length">
+          <li ng-repeat="result in results">
+            <img ng-src="{{result.profile_image_url}}"/>
+            <a ng-href="https://twitter.com/{{result.from_user}}/status/{{result.id_str}}">{{result.text}}</a>
+            {{result.from_user}}
+          </li>
+      </ul>
+      <p ng-hide="results.length">↑ から検索してください。</p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+    <script src="twitter-search.js"></script>
+  </body>
+</html>
